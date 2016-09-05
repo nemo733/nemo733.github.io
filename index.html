@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Fuxk , Life" />
+  <meta name="keywords" content="Life's A Struggle" />
 
 
 
@@ -187,6 +187,16 @@
         </li>
       
         
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
         <li class="menu-item menu-item-archives">
           <a href="/archives" rel="section">
             
@@ -299,63 +309,18 @@
       
         
           
-            <h3 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h3><p>进来要进行表单填写完之后进行截图的工作，google了一下找到了html2canvas这款工具。</p>
-<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>使用起来不算难，原理简单说一下，就是把div或者整个body刻制到一个canvas中，然后再将此canvas转化为image。</p>
-<h3 id="填坑"><a href="#填坑" class="headerlink" title="填坑"></a>填坑</h3><ul>
-<li><p>版本问题</p>
-<p>html2canvas的版本控制我觉得有很大的问题，v0.4.1存在多个版本，而官方网站提供的4.1的版本最后一次是2013年的，这个版本是不能显示raido input的（这个稍后详述）,为了解决这个问题，我又找到了2014年更新的4.1版本，官网并不存在。</p>
-<p>另外，v0.5.0稍微尝试了一下，缺陷有点多。对于div的截图智能做到可见范围内的截取，也就是说遇到大的div是不能全部截取的。所以果断又重新拾起0.4.1，注意是<a href="https://raw.githubusercontent.com/CodeYellowBV/html2canvas/master/build/html2canvas.js" target="_blank" rel="external">3034行代码的那个4.1</a>。</p>
-</li>
-<li><p>background color</p>
-<p>因为div的background是transparent，所以截图截取下来的自然就是白色很刺眼的那种<br><strong>解决方案:</strong></p>
-<pre><code>1.官方版的4.1中可以对background进行颜色设定，但是因为不支持radioinput，所以摒弃；
+          前言进来要进行表单填写完之后进行截图的工作，google了一下找到了html2canvas这款工具。
+原理使用起来不算难，原理简单说一下，就是把div或者整个body刻制到一个canvas中，然后再将此canvas转化为image。
+填坑
+版本问题
+html2canvas的版本控制我觉得有很大的问题
+          ...
 
-2.对div进行background－color设定，成功。
-</code></pre></li>
-<li><p>radio input中的dot在chrome中截图下来的效果是白点</p>
-<p>前端不是太懂，只是发现在firefox中截取下来的点击项是黑点，而chrome中却是白点，这显然太影响视觉效果了，于是找到了一下方案，对radio input  进行加工（主要也是调background color）。</p>
-</li>
-</ul>
-<pre><code>input[type=radio]{
-  visibility: hidden;
-}
-input[type=radio] + label:before{
-  margin-left: -20px;
-  height:13px;
-  width:13px;
-  margin-right: 2px;
-  content: &quot; &quot;;
-  display:inline-block;
-  vertical-align: baseline;
-  border:1px solid #777;
-  border-radius:50%;
-}
-input[type=radio]:checked + label:before{
-  background:rgb(0,238,247);
-}
-</code></pre><h3 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h3><ul>
-<li><p>图片格式问题</p>
-<p>png转jpg的时候，图片质量进行了压缩，size小了一半，导致质量下降,看上去像是马赛克，所以在size不是太大的时候，我还是选择使用png格式。</p>
-</li>
-<li><p>缩略图制作</p>
-<p>  python中制作缩略图，采用PIL这个包<em>(pip install pillow)</em>,</p>
-<pre><code>image = Image.open(path + file_name)
-image.thumbnail((620,620),Image.ANTIALIAS)
-image.save(path,&quot;png&quot;)
-</code></pre></li>
-</ul>
-<h3 id="图片服务器"><a href="#图片服务器" class="headerlink" title="图片服务器"></a>图片服务器</h3><ul>
-<li><p>最简单的服务器</p>
-<p>将静态路径在</p>
-<p>1.settings中设置，MEDIA_ROOT 与 MEDIA_URL</p>
-<p>2.urls配置</p>
-<pre><code>DIRNAME = os.path.dirname(__file__)
-urlpatterns += patterns(&quot;&quot;,
-(r&apos;^media/(?P&lt;path&gt;.*)$&apos;, &apos;django.views.static.serve&apos;, {&apos;document_root&apos;: settings.MEDIA_ROOT, &apos;show_indexes&apos;: True }),)
-</code></pre></li>
-</ul>
-
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/03/31/关于html2canvas的使用填坑/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
@@ -447,74 +412,21 @@ urlpatterns += patterns(&quot;&quot;,
       
         
           
-            <h3 id="困境"><a href="#困境" class="headerlink" title="困境"></a>困境</h3><p>1.不要中断</p>
-<pre><code>做一件事，在拆分成各个小段之后，在没有特别原因的情况下，不要中断
+          困境1.不要中断
+做一件事，在拆分成各个小段之后，在没有特别原因的情况下，不要中断
 去做其他的事情，坚持完成每一部分。
-</code></pre><h3 id="醒悟"><a href="#醒悟" class="headerlink" title="醒悟"></a>醒悟</h3><h3 id="现实"><a href="#现实" class="headerlink" title="现实"></a>现实</h3><p>1.速成绝无可能</p>
-<pre><code>戒骄戒躁，很大的事情拆分成各个部分，一步一步来。
-</code></pre><p>2.我要和我有</p>
-<pre><code>对于我想要的东西，列出来一层一层拆分到需要我有什么。我现在没有的就
-要去变成我有的。    
-</code></pre><h3 id="管理"><a href="#管理" class="headerlink" title="管理"></a>管理</h3><p>1.及时行动</p>
-<pre><code>计划实施前不需要拿“先玩2小时”这种借口来浪费两小时。
-</code></pre><p>2.关注步骤</p>
-<pre><code>任何任务可以拆分为各个步骤，认真完成每一步。一项大的任务，拆分成若
-干份，每完成其中的5份或者完成一章要进行一次总结。任务完成最后，也
-要来一遍系统性的总结。
-</code></pre><p>3.并行串行</p>
-<pre><code>做事情的并行串行，在我看来只有在很明显的可以并行的情况下，再去并行，
-不然盲目的并行不但效率提高不了多少，还会浪费脑力，产生焦虑，还不如
-稳稳地一件一件来。
-</code></pre><p>4.坚持做好“事件日记”</p>
-<p>5.计划（拆分为年计划，月计划，年计划）</p>
-<pre><code>先把实现列好的计划完成，再去做后来忽然想添加的计划，除非这个要插队的
-计划的优先级特别高。可以将这个插队的计划安排到下一周或者下一个月。
+醒悟现实1.速成绝无可能
+戒骄戒躁，很大的事情拆分成各个部分，一步一步来。
+2.我要和我有
+对于我想要的东西，列出来一层一层拆分到需要我有什么。我现在没有的就
+要去变成我有的。  
+          ...
 
-没有特殊原因，就应该无条件的完成事先制定的计划。
-</code></pre><p>6.列表与流程。常备纸和笔。</p>
-<pre><code>目前，我给自己的背包安排要装的东西。
-1.纸和笔
-2.笔记本电脑
-3.一本书
-4.一包纸
-5.移动电源
-
-对于将要做的事作好简单的记录。
-</code></pre><p>7.预演</p>
-<pre><code>一段程序，一次演示都应该提前过至少一遍，再去运行。
-</code></pre><h3 id="学习"><a href="#学习" class="headerlink" title="学习"></a>学习</h3><p>1.自学</p>
-<pre><code>完全靠自己学一样东西吧——管它是什么，并且一定要学好，学到比相当数量的
-人都好。
-</code></pre><p>2.静心</p>
-<pre><code>在学习的任何一个阶段，都会有一段时间进展缓慢。只有经历积累的过
-程，“量变到质变：的效果才会出现。所以，要静下心有一个等待的过程。
-</code></pre><h3 id="思考"><a href="#思考" class="headerlink" title="思考"></a>思考</h3><p>1.聆听</p>
-<pre><code>听完别人的全部说话再插嘴评论；
-跟上别人说话的速度，不要走神。
-</code></pre><p>2.不要说的话</p>
-<pre><code>“要是...就好了”
-</code></pre><h3 id="交流"><a href="#交流" class="headerlink" title="交流"></a>交流</h3><p>1.耐心</p>
-<pre><code>遇到不理解的东西，最好纪录下来，之后弄懂。
-</code></pre><h3 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h3><p>1.兴趣</p>
-<pre><code>很多人并不是对自己正在做的事情没有兴趣，只是没有能力把目前正在做的
-事情做好罢了。
-某件事情只要能做好，并且做的比大多数人好，他就不会对那件事没兴趣。
-往往不是有兴趣才能做好，而是做好了才有兴趣。
-</code></pre><p>2.痛苦</p>
-<pre><code>做任何一件必须记住大量信息的工作的时候，一定要想办法由衷地把这件事
-当作一件快乐的事情去做，才不会被大脑自动地保护性地列入“遗忘”序列。
-</code></pre><p>3.人脉</p>
-<pre><code>1，专心做可以提升自己的事情，学习并拥有更多、更好的技能，成为一个值
-得他人交往的人。
-2.学会独善其身，以不给他人制造麻烦为美德，用自己的独立赢得尊重。
-3.时间久了没有联系的好友，在没有事做的时候，试着去聊聊天。
-</code></pre><p>4.社会</p>
-<pre><code>停止嘲弄别人，因为风水轮流转。
-</code></pre><p>5.效率</p>
-<pre><code>1.每日工作时间按照“黄金分割率”，即6.18个小时
-2.“番茄工作法“
-</code></pre>
-          
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/02/28/把时间当作朋友/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
